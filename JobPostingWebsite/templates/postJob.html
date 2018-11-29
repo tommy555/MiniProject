@@ -1,0 +1,43 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Post Job
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>Please fill out new job's information</h1>
+    <form action="/addJob/" method="POST">
+        {%csrf_token%}
+        <p>Job name</p>
+        <input type="text" required autofocus name="name">
+        <p>Type of job</p>
+        {%include "jobTypeSelect.html"%}
+        <p>Skill</p>
+        <input type="text" name="skill_required" value="{{job.skill_required}}" id="skillText" class="uneditable" readonly>
+        <p>
+            {%include "skillSelect.html"%}
+            <p>
+                <button type="button" id="addSkill" class="button">Add</button>
+                <button type="button" id="clearSkill" class="button2">Clear</button>
+            </p>
+        </p>
+        <p>Job Description</p>
+        <input type="text" required name="desc">
+        <p>Salary</p>
+        <input type="number" required name="salary" step=".01" min="0">
+        <p>Start time</p>
+        <input type="time" required name="start_time">
+        <p>End time</p>
+        <input type="time" required name="end_time">
+        <button type="submit" class="button">Post Job</button>
+    </form>
+</section>
+{%load static%}
+<script src="{%static 'script/setSkills.js'%}"></script>
+{%endblock%}

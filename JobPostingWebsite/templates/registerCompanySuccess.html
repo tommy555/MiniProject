@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Register success
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>Your company are registered!!</h1>
+    <h3>Tons of talented people are ready to work in your company now!!</h3>
+    <a href="/login/" class="underlined">Return to login page</a>
+</section>
+{%endblock%}

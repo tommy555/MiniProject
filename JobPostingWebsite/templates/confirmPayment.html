@@ -1,0 +1,20 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Confirm payment
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>
+        You are going to extend the job: {{job.name}} for another 60 days...
+    </h1>
+    <h1>Total: RM 120</h1>
+    <a href="/extendJob/{{job.id}}"><button class="button paymentBtn">Extend Job</button></a>
+</section>
+{%endblock%}

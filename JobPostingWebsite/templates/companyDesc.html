@@ -1,0 +1,63 @@
+{%load static%}
+<section class="company-detail card rounded-box container">
+    <h1>Company description</h1>
+    <div class="upper-detail">
+        {%if company.img == ""%}
+        <img src="{%static 'img/logo.jpg'%}" alt="{{company.username}}" class="brands-thumb rounded-box">
+        {%else%}
+        <img src="{{company.img.url}}" alt="{{company.username}}" class="brands-thumb rounded-box">
+        {%endif%}
+        <div class="company-detail1">
+            <h1>{{company.name}}</h1>
+            <p>{{company.type}}</p>
+        </div>
+
+        <div id="info">
+            <div class="company-detail2">
+                <p class="detail-title">Reg Number</p>
+                <p>{{company.company_reg}}</p>
+                <p class="detail-title">Spoken language</p>
+                <p>
+                    {%if company.spoken_lang == ""%}
+                        Not specified
+                    {%else%}
+                        {{company.spoken_lang}}
+                    {%endif%}
+                </p>
+                <p class="detail-title">Contact</p>
+                <p>{{company.contact}}</p>
+            </div>
+    
+            <div class="company-detail2">
+                <p class="detail-title">Website</p>
+                <p>
+                    {%if company.website == ""%}
+                        Not specified
+                    {%else%}
+                        <a href="http://{{company.website}}">{{company.website}}</a>
+                    {%endif%}
+                </p>
+                <p class="detail-title">Location</p>
+                <p>
+                    {%if company.town is not None%}
+                    {{company.town}},
+                    {%endif%}
+                    {%if company.state is not None%}
+                    {{company.state}},
+                    {%endif%}
+                    {{company.country}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="lower-detail">
+        <p>
+            {%if company.desc == None or company.desc == ""%}
+                This company didn't specified any description
+            {%else%}
+                {{company.desc}}
+            {%endif%}
+        </p>
+    </div>
+</section>

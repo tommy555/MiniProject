@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Apply Fail...
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>
+        You have already applied this job, please kindly wait for the reply from {{name}}
+    </h1>
+</section>
+{%endblock%}

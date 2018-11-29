@@ -1,0 +1,9 @@
+{%for e in jobs%}
+{%if e.is_approved == False%}
+<a href="/getJob/{{e.id}}/" class="jobs-list rounded-box">
+    <p id="jobs-title">{{e.name}}</p>
+    <p id="jobs-requirement" class="truncate">{{e.skill_required}}</p>
+    <p id="jobs-company">{{e.company.username}}</p>
+</a>
+{%endif%}
+{%endfor%}

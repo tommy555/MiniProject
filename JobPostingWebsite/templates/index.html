@@ -1,0 +1,42 @@
+{% extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Welcome
+</title>
+{%endblock%}
+
+{%block content%}
+<section class="desc card img-card rounded-box container">
+    <h1>Find your best opportunities here and make your life better</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem porro quas quidem debitis nobis. Ea aut ab et magnam dignissimos voluptatum nam autem tenetur praesentium vel, numquam inventore deleniti odio!</p>
+</section>
+
+<section class="award-list container">
+    <section class="award card rounded-box">
+        <i class="fas fa-hand-holding-usd fa-8x"></i>
+        <p>Highest salaries for all jobs</p>
+    </section>
+
+    <section class="award card rounded-box">
+        <i class="fas fa-users fa-8x"></i>
+        <p>Best rated customer service at 24/7</p>
+    </section>
+
+    <section class="award card rounded-box">
+        <i class="fas fa-city fa-8x"></i>
+        <p>More than 1000++ domestic company are waiting for you</p>
+    </section>
+
+    <section class="award card rounded-box">
+        <i class="fas fa-chart-area fa-8x"></i>
+        <p>Most powerful data analysis to help you find the best jobs</p>
+    </section>
+</section>
+
+<section class="companies card rounded-box container">
+    <h1>Associated Companies: </h1>
+    <section class="company-list">
+        {%include "companiesList.html"%}
+    </section>
+</section>
+{%endblock%}

@@ -1,0 +1,5 @@
+<select name="skillRequired" id="skillRequired" required>
+    {%for e in skills%}
+    <option value="{{e.id}}">{{e.name}}</option>
+    {%endfor%}
+</select>

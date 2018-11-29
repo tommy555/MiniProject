@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Company detail
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+{%include "companyDesc.html"%}
+<section class="jobs-offered card rounded-box container">
+    <h1>Offered Jobs:</h1>
+    {%include "jobsList.html"%}
+</section>
+{%endblock%}

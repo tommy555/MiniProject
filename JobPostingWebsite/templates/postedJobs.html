@@ -1,0 +1,28 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Posted jobs
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>Your jobs</h1>
+    {%include "jobsList.html"%}
+</section>
+
+<section class="card rounded-box container">
+    <h1>In pending jobs</h1>
+    {%include "jobsListNotApproved.html"%}
+</section>
+
+<section class="card rounded-box container">
+    <h1>Expired jobs</h1>
+    {%include "jobsListExpired.html"%}
+</section>
+
+{%endblock%}

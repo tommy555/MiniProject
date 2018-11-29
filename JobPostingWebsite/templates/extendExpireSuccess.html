@@ -1,0 +1,20 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Extends Success!!
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>
+        You have successfully extend the job: {{job.name}} another 60 days!!
+    </h1>
+
+    <h1>Thanks for posting a job.</h1>
+</section>
+{%endblock%}

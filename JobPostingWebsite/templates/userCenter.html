@@ -1,0 +1,133 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - User Center
+</title>
+{%endblock%}
+
+{%block username%}
+{{user.username}}
+{%endblock%}
+
+{%block content%}
+{%if request.session.user_type == "Normal"%}
+
+<section class="user-center card rounded-box container">
+    <h1>User center</h1>
+    <form action="/updateUserInfo/" method="POST">
+        {%csrf_token%}
+        <p>
+            <p>Email</p>
+            <input type="email" value="{{user.email}}" class="uneditable" readonly>
+        </p>
+        <p>
+            <p>Username</p>
+            <input type="text" value="{{user.username}}" name="username" required>
+        </p>
+        <p>
+            <p>NRIC</p>
+            <input type="text" value="{{user.nric}}" class="uneditable" readonly id="nric">
+        </p>
+
+        <p>
+            <p>Skills</p>
+            <input type="text" name="skills" value="{{user.skills}}" id="skillText" class="uneditable"readonly>
+            <p>
+                {%include "skillSelect.html"%}
+                <p>
+                    <button type="button" id="addSkill" class="button">Add</button>
+                    <button type="button" id="clearSkill" class="button2">Clear</button>
+                </p>
+            </p>
+        </p>
+        <p>
+            <p>Contact</p>
+            <input type="text" value="{{user.contact}}" name="contact" required id="contact">
+        </p>
+        <p>
+            <p>Bio</p>
+            <textarea name="bio" cols="30" rows="10">{{user.bio}}</textarea>
+        </p>
+        <p><a href="/changePassword/{{user.email}}">Change password</a></p>
+        
+        <p><button type="button" class="button" id="userSubmit">Update</button></p>
+    </form>
+</section>
+
+{%elif request.session.user_type == "Company"%}
+
+<section class="user-center card rounded-box container">
+    <h1>User center</h1>
+        <form action="/updateCompanyInfo/" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <input type="text" id="company_type" style="display:none" value="{{user.company_type}}">
+            <input type="text" id="company_state" style="display:none" value="{{user.state}}">
+            <input type="text" id="company_country" style="display:none" value="{{user.country}}">
+            <p>
+                <p>Company Email</p>
+                <input type="email" value="{{user.email}}" class="uneditable" readonly>
+            </p>
+            <p>
+                <p>Company name</p>
+                <input type="text" value="{{user.username}}" name="username">
+            </p>
+            <p>
+                <p>Company Registration Number</p>
+                <input type="text" value="{{user.company_reg}}" class="uneditable" readonly>
+            </p>
+            <p>
+                <p>Company Type</p>
+                {%include "companyTypeSelect.html"%}
+            </p>
+            <p>
+                <p>Company Contact</p>
+                <input type="text" value="{{user.contact}}" name="contact" id="contact">
+            </p>
+            <p>
+                <p>Location</p>
+                <label for="country">Country</label>
+                <select id="countrySelect" required></select>
+                <input type="text" name="country" style="display:none" id="country" value="{{user.country}}" required>
+                <label id="labelState" for="state">State</label>
+                <select id="stateSelect"></select>
+                <input type="text" name="state" style="display:none" id="state" value="{{user.state}}">
+            </p>
+            <p>
+                <p>Spoken Language in Company</p>
+                <input type="text" name="spoken_lang" value="{{user.spoken_lang}}" class="uneditable" id="spokenLang" readonly>
+                <div class="checkbox-lang">
+                    <input type="checkbox" value="English" id="engLang"> English
+                    <input type="checkbox" value="Mandarin" id="mandLang"> Mandarin
+                    <input type="checkbox" value="Malay" id="malayLang"> Malay
+                </div>
+            </p>
+            <p>
+                <p>Company Website</p>
+                <input type="text" name="website" value="{{user.website}}">
+            </p>
+            <p>
+               <p>Company Description</p>
+                <textarea name="desc" cols="30" rows="10">
+                    {{user.desc}}
+                </textarea>
+            </p>
+
+            <p>Company profile picture</p>
+            <input type="file" name="img" accept="image/*">
+            
+            <p><a href="/changePassword/{{user.email}}">Change password</a></p>
+            
+            <p><button type="button" class="button" id="submitForm">Update</button></p>
+        </form>
+    </section>
+
+{%endif%}
+
+{%load static%}
+<script src="{%static 'script/loadLocationSelection.js'%}"></script>
+<script src="{%static 'script/setCompanyUpdateDefault.js'%}"></script>
+<script src="{%static 'script/setSkills.js'%}"></script>
+<script src="{%static 'script/langPicker.js'%}"></script>
+<script src="{%static 'script/userRegisterFormChecker.js'%}"></script>
+<script src="{%static 'script/companyFormChecker.js'%}"></script>
+{%endblock%}

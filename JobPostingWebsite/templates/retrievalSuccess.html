@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Success
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>Retrieval link have been sent to {{ email }}</h1>
+    <p>Please head to your email to continue the password retrieval proccess.</p>
+</section>
+{%endblock%}

@@ -1,0 +1,76 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Job Detail
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="jobs-detail card rounded-box container">
+    <h1>Job description</h1>
+    <div class="jobs-detail-upper">
+        <div class="jobs-detail-1">
+            <p class="detail-title">Job</p>
+            <p>{{job.name}}</p>
+            <p class="detail-title">Type</p>
+            <p>{{job.job_type.name}}</p>
+            <p class="detail-title">Required skill</p>
+            <p>{{job.skill_required}}</p>
+        </div>
+    
+        <div class="jobs-detail-2">
+            <p class="detail-title">Description</p>
+            <p>{{job.desc}}</p>
+            <p class="detail-title">Salary</p>
+            <p>RM {{job.salary}}</p>
+            <p class="detail-title">Time</p>
+            <p>{{job.start_time}} - {{job.end_time}}</p>
+        </div>
+    </div>
+
+    <div class="jobs-detail-lower">
+        {%if request.session.user_type == "Normal"%}
+            {%if job_is_applied%}
+            <a href=""><button class="button2" id="applyBtn">Job Applied</button></a>
+            {%else%}
+            <a href="/applyJob/{{job.id}}"><button class="button" id="applyBtn">Apply This Job now</button></a>
+            {%endif%}
+        {%elif request.session.user_type == "Admin"%}
+        <ul id="jobsBtnGroup">
+            {%if not job.is_expired%}
+            <li><a href="/approveJob/{{job.id}}"><button class="button approve">Approve</button></a></li>
+            <li><a href="/declineJob/{{job.id}}"><button class="button2 decline">Decline</button></a></li>
+            {%else%}
+            <li><a href="/deleteJob/{{job.id}}"><button class="button2">Delete</button></a></li>
+            {%endif%}
+        </ul>
+        {%elif request.session.user_type == "Company"%}
+            {%if not job.is_approved%}
+            <h1>The approval of this job is still pending... We will get this done asap</h1>
+            {%else%}
+                {%if job.is_expired%}
+                <h1 class="red-font">Your job is expired, the job post won't be seen by anyone unless you extend the expiration date</h1>
+                <a href="/makePayment/{{job.id}}"><button class="button">Extend Expiration date</button></a>
+                {%else%}
+                <h1 class="green-font">This post will be expired at {{job.expired_date}}</h1>
+                {%endif%}
+            {%endif%}
+
+            {%if not job.is_approved or not job.is_expired%}
+            <ul id="jobsBtnGroup">
+                <li><a href="/editJobPost/{{job.id}}"><button class="button">Edit</button></a></li>
+                <li><a href="/deleteJob/{{job.id}}"><button class="button2">Delete</button></a></li>
+            </ul>
+            {%endif%}
+        {%else%}
+        <a href="/login/"><button class="button2" id="applyBtn">Sign in to apply</button></a>
+        {%endif%}
+    </div>
+</section>
+
+{%include "companyDesc.html"%}
+{%endblock%}

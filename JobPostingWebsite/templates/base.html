@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    {%block title%}
+    {%endblock%}
+</head>
+<body>
+    <nav class="rounded-box">
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo"> 
+        {%if request.session.user_id == None%}
+        <section class="nav-selection">
+            <a href="/index/" class="nav-link"><i class="fas fa-home"></i>Home</a>
+            <a href="/searchJobs/" class="nav-link"><i class="fas fa-scroll"></i>Jobs</a>
+            <!-- <a href="/searchCompany/" class="nav-link"><i class="fas fa-building"></i>Company</a> -->
+            <a href="/login/" class="nav-link"><i class="fas fa-user"></i>Login</a>
+            <a href="/contactus/" class="nav-link"><i class="fas fa-question-circle"></i>Contact Us</a>
+        </section>
+        {%else%}
+        <section class="nav-selection">
+            <a href="/index/" class="nav-link"><i class="fas fa-home"></i>Home</a>
+            {%if request.session.user_type == "Normal"%}
+            <a href="/searchJobs/" class="nav-link"><i class="fas fa-scroll"></i>Jobs</a>
+            <!-- <a href="/searchCompany/" class="nav-link"><i class="fas fa-building"></i>Company</a> -->
+            {%elif request.session.user_type == "Admin"%}
+            <a href="/viewDeclinedJob/" class="nav-link"><i class="fas fa-ban"></i>Declined Job</a>
+            <a href="/viewExpiredJob/" class="nav-link"><i class="fas fa-clock"></i>Expired Job</a>
+            {%elif request.session.user_type == "Company"%}
+            <a href="/viewPostedJobs/" class="nav-link"><i class="fas fa-scroll"></i>Your jobs</a>
+            {%endif%}
+
+            {%if request.session.user_type == "Company" or request.session.user_type == "Normal"%}
+            <a href="/userCenter/" id="user-center"><i class="fas fa-user"></i>
+                {%block username%}
+                {%endblock%}
+            </a>
+            {%endif%}
+            <a href="/logout/" class="nav-link logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </section>
+        {%endif%}
+    </nav>
+
+    {%block content%}
+    {%endblock%}
+
+    <footer>
+        <p>Side Income - Mini Project &copy; 2018</p>
+        <ul class="contact-list">
+            <li><a href="http://www.facebook.com"><i class="fab fa-facebook-square fa-2x"></i></a></li>
+            <li><a href="http://www.instagram.com"><i class="fab fa-instagram fa-2x"></i></a></li>
+            <li><a href="http://www.twitter.com"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+            <li><a href="http://www.youtube.com"><i class="fab fa-youtube fa-2x"></i></a></li>
+        </ul>
+    </footer>
+</body>
+</html>

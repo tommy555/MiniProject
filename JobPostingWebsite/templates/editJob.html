@@ -1,0 +1,46 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Edit Job
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container">
+    <h1>Please fill out new job's information</h1>
+    <form action="/editJob/{{job.id}}/" method="POST">
+        {%csrf_token%}
+        <p>Job name</p>
+        <input type="text" required autofocus name="name" value="{{job.name}}">
+        <p>Type of job</p>
+        <input type="text" value="{{job.job_type.name}}" id="jobType">
+        {%include "jobTypeSelect.html"%}
+        <p>Required skill</p>
+        <input type="text" required name="skill_required" value="{{job.skill_required}}" id="skillText" class="uneditable" readonly>
+        <p>
+            {%include "skillSelect.html"%}
+            <p>
+                <button type="button" id="addSkill" class="button">Add</button>
+                <button type="button" id="clearSkill" class="button2">Clear</button>
+            </p>
+        </p>
+        <p>Job Description</p>
+        <input type="text" required name="desc" value="{{job.desc}}">
+        <p>Salary</p>
+        <input type="number" required name="salary" step=".01" min="0" value="{{job.salary}}">
+        <p>Start time</p>
+        <input type="time" required name="start_time" id="startTime" value="{{job.start_time}}">
+        <p>End time</p>
+        <input type="time" required name="end_time" id="endTime" value="{{job.end_time|time:'H:M:S'}}">
+        <!-- %H:%M:%S' -->
+        <button type="submit" class="button">Edit Job</button>
+    </form>
+</section>
+{%load static%}
+<script src="{%static 'script/setSkills.js'%}"></script>
+<script src="{%static 'script/setDefaultJobType.js'%}"></script>
+{%endblock%}

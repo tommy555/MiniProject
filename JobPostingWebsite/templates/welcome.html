@@ -1,0 +1,35 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Your best jobs finder
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<!-- For normal user -->
+{%if request.session.user_type == "Normal"%}
+<section class="jobs-offered card rounded-box container">
+    <h1>LiSa's suggested these to you:</h1>
+    {%include "jobsList.html"%}
+</section>
+<section class="companies card rounded-box container">
+    <h1>These company is looking for the talented people like you: </h1>
+    {%include "companiesList.html"%}
+</section>
+
+<!-- for company user -->
+{%elif request.session.user_type == "Company"%}
+<section class="card rounded-box container">
+    <h1>Ready to add some jobs?</h1>
+    <a href="/postJobs/"><button class="button btn-no-margin">Post job</button></a>
+</section>
+
+<!-- for admin -->
+{%elif request.session.user_type == "Admin"%}
+{%include "jobApprovalList.html"%}
+{%endif%}
+{%endblock%}

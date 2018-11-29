@@ -1,0 +1,5 @@
+<select name="company_type" id="companyType" required>
+    {%for e in company_types%}
+    <option value="{{e.id}}">{{e.name}}</option>
+    {%endfor%}
+</select>

@@ -1,0 +1,38 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Search Company
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="search-bar card rounded-box container">
+    <form action="#" method="GET">
+        {% csrf_token %}
+        <input type="text" required autofocus placeholder="Enter 'Keywords' here.....">
+        <button type="submit"><i class="fas fa-search fa-2x"></i></button>
+    </form>
+</section>
+
+{%if found_list%}
+<section class="company-results card rounded-box container">
+    <h1>What we found.....</h1>
+    {% for c in companies%}
+        <a href="/getCompany/{{c.id}}/" class="company-result rounded-box card container">
+            <img src="{{c.img_location}}" alt="{{c.name}}" class="brands-thumb rounded-box">
+            <p id="company-title">{{c.name}}</p>
+            <p id="company-addr">{{c.city}}, {{c.state}}</p>
+        </a>
+    {% endfor %}
+</section>
+{%endif%}
+
+<section class="companies card rounded-box container">
+    <h1>Current top company: </h1>
+    {%include "companiesList.html"%}
+</section>
+{%endblock%}

@@ -1,0 +1,5 @@
+<select name="job_type" id="job_type" required>
+    {%for e in job_types%}
+    <option value="{{e.id}}">{{e.name}}</option>
+    {%endfor%}
+</select>

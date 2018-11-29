@@ -1,0 +1,10 @@
+{%load static%}
+<section class="company-list">
+    {% for c in companies%}
+    {%if c.img == ""%}
+    <a href="/getCompany/{{c.id}}/"><img src="{%static 'img/logo.jpg'%}" alt="{{c.username}}" class="brands-thumb rounded-box"></a>
+    {%else%}
+    <a href="/getCompany/{{c.id}}/"><img src="{{c.img.url}}" alt="{{c.username}}" class="brands-thumb rounded-box"></a>
+    {%endif%}
+    {% endfor %}
+</section>

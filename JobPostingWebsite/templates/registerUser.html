@@ -1,0 +1,71 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Register user
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="register-selection card rounded-box container">
+    <a href="/registerUser/" class="register-highlighted-left"><i class="fas fa-user"> Register User</i></a>
+    <a href="/registerCompany"><i class="fas fa-building"> Register Company</i></a>
+</section>
+
+<section class="form-field card rounded-box container">
+
+    <form action="/storeUser/" method="POST" id="registerUserForm">
+        {% csrf_token %}
+        <p>
+            User Email
+            {%if email_crashed == True%}
+            <i class="danger">(Email has been registered)</i>
+            {%endif%}
+        </p>
+        <input type="email" name="email" autofocus required>
+
+        <p>Username</p>
+        <input type="text" name="username" required>
+
+        <p>
+            NRIC (No '-' required)
+            {%if nric_crashed == True%}
+            <i class="danger">(NRIC has been used)</i>
+            {%endif%}
+        </p>
+        <input type="text" name="nric" required maxlength="12" minlength="12" id="nric">
+
+        <p>Required skill</p>
+        <input type="text" required name="skills" id="skillText" class="uneditable" readonly>
+        <p>
+            {%include "skillSelect.html"%}
+            <p>
+                <button type="button" id="addSkill" class="button">Add</button>
+                <button type="button" id="clearSkill" class="button2">Clear</button>
+            </p>
+        </p>
+
+        <p>Contact</p>
+        <input type="text" name="contact" required id="contact">
+
+        <p>
+            Password
+            {%if password_matched == False%}
+            <i class="danger">(Password 1 not same with Password 2)</i>
+            {%endif%}
+        </p>
+        <input type="password" name="password" required>
+
+        <p>Re-type Password</p>
+        <input type="password" name= "password2" required>
+
+        <button type="button" class="button" id="userSubmit"><i class="fas fa-share-square"></i> Register</button>
+    </form>
+</section>
+{%load static%}
+<script src="{%static 'script/setSkills.js'%}"></script>
+<script src="{%static 'script/userRegisterFormChecker.js'%}"></script>
+{%endblock%}

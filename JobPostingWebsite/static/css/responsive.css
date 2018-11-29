@@ -1,0 +1,180 @@
+/* Responsive Query */
+@media(max-width: 1109px){
+    nav {
+        grid-template-columns: 1fr;
+    }
+
+    .logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .nav-selection {
+        padding: 0.5em 0.5em 1em 0.5em;
+    }
+
+    .award-list {
+        grid-template-columns: 1fr 1fr;
+    }
+    .desc {
+        font-size: 1.5em;
+    }
+
+@media(max-width: 900px){
+
+    .company-detail1 {
+        padding: 0;
+        margin: 0;
+    }
+    .upper-detail{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .upper-detail #info {
+        margin-top: 30px;
+        grid-column: 1/ span 2;
+    }
+}
+
+@media(max-width: 641px){
+    .award-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1em;
+        padding: 0;
+    }
+
+    footer p, footer .contact-list{
+        float: none;
+        padding: 0;
+    }
+    .nav-selection {
+        grid-template-columns: 1fr;
+    }
+
+    nav a{
+        padding: 0.8em;
+    }
+
+    nav a:hover, .highlighted {
+        color: var(--light);
+        background: var(--dark);
+        border-radius: 1em;
+    }
+
+    .logout:hover {
+        color: white;
+        background: red;
+    }
+
+    input {
+        width: 80%;
+    }
+}
+
+@media(max-width: 636px){
+    .award-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 604px){
+    .jobs-list {
+        display: block;
+        padding: 10px;
+    }
+
+    #jobs-title a{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #jobs-requirement {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media(max-width: 596px){
+    .jobs-detail {
+        display: block;
+        text-align: center;
+    }
+    
+    .jobs-detail-upper {
+        display: block;
+    }
+    
+    .jobs-detail-lower button {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2em;
+        overflow: hidden;
+    }
+
+    .company-detail {
+        text-align: center;
+    }
+    
+    .upper-detail{
+        display: block;
+    }
+
+    .upper-detail img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .upper-detail #info {
+        grid-column: unset;
+        display: block;
+    }
+
+    #rate {
+        padding : 0;
+    }
+}
+
+@media(max-width: 544px){
+    
+    .company-list {
+        display: block;
+        text-align: center;
+    }
+    
+    .brands-thumb {
+        max-width: 200px;
+        margin-bottom: 2em;
+    }
+}
+
+@media(max-width: 300px) {
+
+    .desc {
+        font-size: 1em;
+    }
+
+    .award {
+        font-size: 0.8em;
+    }
+
+    .register-selection {
+        font-size: 1em;
+    }
+    .retrieve-password form button , .change-password form button{
+        font-size: 0.8em;
+    }
+
+    .company-detail h1 {
+        font-size: 1.5em;
+    }
+
+    #rate {
+        font-size: 3em;
+    }
+
+    .jobs-offered {
+        text-align: center;
+    }
+    
+}

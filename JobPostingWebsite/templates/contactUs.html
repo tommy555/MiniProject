@@ -1,0 +1,22 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Contact us
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="retrieve-password card rounded-box container">
+    <h1>Please kindly contact our admin for assistant if you have any inquries..</h1>
+    <h3 style="text-decoration:underline">Available admins</h3>
+    {%for e in admins%}
+    <div style="margin-top: 1.3em">
+        <p><i style="font-weight:bold">{{e.email}}</i>, {{e.username}}</p>
+    </div>
+    {%endfor%}
+</section>
+{%endblock%}

@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Login
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="form-field card rounded-box container">
+    <form action="/loginValidation/" method="POST">
+        {% csrf_token %}
+        <p>
+            Login Email
+            {% if email_found == False %}
+            <i class="danger">(Email not found)</i>
+            {% endif %}
+        </p>
+        <input type="email" name="login_email" autofocus required>
+        <p>
+            Password
+            {% if password_matched == False %}
+            <i class="danger">(Incorrect)</i>
+            {% endif %}
+        </p>
+        <input type="password" name="login_password" required>
+        <button type="submit" class="button"><i class="fas fa-sign-in-alt"></i> Log in</button>
+    </form>
+
+    <a href="/registerUser/">Don't have an account? Create one now!!</a>
+    <a href="/retrievePassword/">Forget your password?</a>
+</section>
+{%endblock%}

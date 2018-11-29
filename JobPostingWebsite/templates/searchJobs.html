@@ -1,0 +1,74 @@
+{%extends "base.html"%}
+{%block title%}
+<title>
+    SideIncome - Search your best job
+</title>
+{%endblock%}
+
+{%block username%}
+{{request.session.username}}
+{%endblock%}
+
+{%block content%}
+<section class="card rounded-box container search-bar ">
+    <form action="/searchJobByKeyword/" method="POST">
+        {% csrf_token %}
+        <input type="text" required autofocus placeholder="Enter 'Keywords' here....." name="search_keyword">
+        <button type="submit"><i class="fas fa-search fa-2x"></i></button>
+    </form>
+</section>
+
+<a href="#" id="advSearch">Advanced search</a>
+
+<section class="advanced-search card rounded-box container" id="advSearchField" style="display:none">
+    <h1>Advanced Search</h1>
+    <form action="/advancedSearch/" method="POST" id="advancedForm">
+        {% csrf_token %}
+        <h3>Choose locations</h3>
+        {%include "locationPicker.html"%}
+
+        <h3>Choose job types</h3>
+        {%include "jobTypeSelect.html"%}
+
+        <h3>Working Hour Durations</h3>
+        <label for="startTime">Start Time</label>
+        <input type="time" name="start_time" id="startTime">
+        <label for="endTime">End Time</label>
+        <input type="time" name="end_time" id="endTime">
+
+        <h3>Salary range</h3>
+        <label for="minSalary">Min Salary</label>
+        <input type="number"  name="min_salary" step=".01" min="0" id="minSalary">
+        <label for="maxSalary">Max Salary</label>
+        <input type="number"  name="max_salary" step=".01" min="0" id="maxSalary">
+
+        <button type="button" class="button" id="submitBtn">Search</button>
+    </form>
+</section>
+
+{%if searched_list == True%}
+<section class="jobs-offered card rounded-box container">
+    <h1>Search Result:</h1>
+    {%include "jobsList.html"%}
+</section>
+{%else%}
+<section class="jobs-offered card rounded-box container">
+    <h1>LiSa's suggested these to you:</h1>
+    {%include "jobsList.html"%}
+</section>
+{%endif%}
+
+{%load static%}
+<script src="{%static 'script/advancedSearch.js'%}"></script>
+<script src="{%static 'script/loadLocationSelection.js'%}"></script>
+<script src="{%static 'script/advancedFormChecker.js'%}"></script>
+<script>
+    option = document.getElementById("job_type").options;
+    for (var i=0; i< option.length; i++){
+        if (option[i].text == "-"){
+            document.getElementById("job_type").selectedIndex = option[i].index;
+        }
+    }
+</script>
+
+{%endblock%}
